@@ -12,11 +12,11 @@ public class NewsController {
     private final NewsService<NewsDtoRequest, NewsDtoResponse> newsService = new NewsServiceImpl();
 
     public List<NewsDtoResponse> getAll() {
-        return newsService.getAll();
+        return newsService.readAll();
     }
 
     public NewsDtoResponse getById(Long id) {
-        return newsService.getById(id);
+        return newsService.readById(id);
     }
 
     public NewsDtoResponse create(NewsDtoRequest request) {

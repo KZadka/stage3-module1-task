@@ -27,7 +27,7 @@ class NewsServiceImplTest {
     void givenSizeOfFullList_whenGetAll_thenReturnListOfAllNews() {
         int expectedSize = 20;
 
-        List<NewsDtoResponse> newsList = service.getAll();
+        List<NewsDtoResponse> newsList = service.readAll();
 
         assertEquals(expectedSize, newsList.size());
     }
@@ -36,7 +36,7 @@ class NewsServiceImplTest {
     void givenNewsId_whenGetNewsById_thenReturnNewsDtoResponse() {
         long expectedId = 5;
 
-        NewsDtoResponse response = service.getById(expectedId);
+        NewsDtoResponse response = service.readById(expectedId);
 
         assertNotEquals(null, response);
         assertEquals(expectedId, response.getId());
@@ -46,7 +46,7 @@ class NewsServiceImplTest {
     void givenWrongNewsId_whenGetNewsById_thenThrowException() {
         long wrongNewsId = 21;
 
-        assertThrows(ResourceNotFoundException.class, () -> service.getById(wrongNewsId));
+        assertThrows(ResourceNotFoundException.class, () -> service.readById(wrongNewsId));
     }
 
     @Test
@@ -61,7 +61,7 @@ class NewsServiceImplTest {
 
     @Test
     void givenNewsDtoRequest_whenUpdate_thenReturnUpdatedNewsDtoResponse() {
-        LocalDateTime timeOfCreation = service.getById(1L).getCreateDate();
+        LocalDateTime timeOfCreation = service.readById(1L).getCreateDate();
         NewsDtoResponse expected = new NewsDtoResponse(1L, "Updated Title", "Updated Content", timeOfCreation, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), 2L);
 
         NewsDtoResponse actual = service.update(new NewsDtoRequest(1L, "Updated Title", "Updated Content", 2L));

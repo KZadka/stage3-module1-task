@@ -3,15 +3,15 @@ package com.mjc.school.service;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import com.mjc.school.service.exceptions.ValidatorException;
-import com.mjc.school.service.validator.Validator;
+import com.mjc.school.service.validator.NewsValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ValidatorTest {
+class NewsValidatorTest {
 
-    private final Validator validator = new Validator();
+    private final NewsValidator validator = new NewsValidator();
 
     @Test
     void givenNullAsTitle_whenValidateNewsTitle_thenThrowException() {

@@ -6,7 +6,7 @@ import com.mjc.school.repository.implementation.NewsRepositoryImpl;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.interfaces.NewsService;
-import com.mjc.school.service.validator.Validator;
+import com.mjc.school.service.validator.NewsValidator;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 
@@ -18,17 +18,17 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
 
     private final ModelMapper modelMapper = new ModelMapper();
     private final NewsRepository<NewsModel> repository = new NewsRepositoryImpl();
-    private final Validator validator = new Validator();
+    private final NewsValidator validator = new NewsValidator();
 
     @Override
-    public List<NewsDtoResponse> getAll() {
+    public List<NewsDtoResponse> readAll() {
         return repository.readAll().stream()
                 .map(news -> modelMapper.map(news, NewsDtoResponse.class))
                 .toList();
     }
 
     @Override
-    public NewsDtoResponse getById(Long id) {
+    public NewsDtoResponse readById(Long id) {
         validator.validateId(id);
         if (repository.newsExistsById(id)) {
             NewsModel news = repository.readById(id);
