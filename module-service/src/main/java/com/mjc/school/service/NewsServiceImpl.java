@@ -1,7 +1,7 @@
 package com.mjc.school.service;
 
-import com.mjc.school.repository.entity.News;
 import com.mjc.school.repository.NewsRepository;
+import com.mjc.school.repository.entity.News;
 import com.mjc.school.repository.implementation.NewsRepositoryImpl;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoResponse> {
 
@@ -21,7 +20,7 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
     public List<NewsDtoResponse> getAll() {
         return repository.readAll().stream()
                 .map(news -> modelMapper.map(news, NewsDtoResponse.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
