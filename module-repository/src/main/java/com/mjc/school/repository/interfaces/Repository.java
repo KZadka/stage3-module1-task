@@ -2,7 +2,7 @@ package com.mjc.school.repository.interfaces;
 
 import java.util.List;
 
-public interface NewsRepository <T> {
+public interface Repository<T> {
 
     List<T> readAll();
 

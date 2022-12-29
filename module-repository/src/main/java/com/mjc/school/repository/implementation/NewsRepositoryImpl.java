@@ -2,13 +2,13 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.data.DataSource;
 import com.mjc.school.repository.entity.NewsModel;
-import com.mjc.school.repository.interfaces.NewsRepository;
+import com.mjc.school.repository.interfaces.Repository;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class NewsRepositoryImpl implements NewsRepository<NewsModel> {
+public class NewsRepositoryImpl implements Repository<NewsModel> {
 
     private final DataSource dataSource = new DataSource();
 

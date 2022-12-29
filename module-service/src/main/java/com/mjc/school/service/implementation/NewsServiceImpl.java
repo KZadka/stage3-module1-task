@@ -1,6 +1,6 @@
 package com.mjc.school.service.implementation;
 
-import com.mjc.school.repository.interfaces.NewsRepository;
+import com.mjc.school.repository.interfaces.Repository;
 import com.mjc.school.repository.entity.NewsModel;
 import com.mjc.school.repository.implementation.NewsRepositoryImpl;
 import com.mjc.school.service.dto.NewsDtoRequest;
@@ -17,7 +17,7 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoResponse> {
 
     private final ModelMapper modelMapper = new ModelMapper();
-    private final NewsRepository<NewsModel> repository = new NewsRepositoryImpl();
+    private final Repository<NewsModel> repository = new NewsRepositoryImpl();
     private final NewsValidator validator = new NewsValidator();
 
     @Override
