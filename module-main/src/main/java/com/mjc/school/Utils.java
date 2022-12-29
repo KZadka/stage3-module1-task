@@ -1,0 +1,92 @@
+package com.mjc.school;
+
+import com.mjc.school.controller.NewsController;
+import com.mjc.school.service.NewsDtoRequest;
+import com.mjc.school.service.exceptions.ValidatorException;
+
+import java.util.Scanner;
+
+public class Utils {
+
+    NewsController newsController = new NewsController();
+
+    public void menu() {
+        System.out.println("Pick a number for operation: ");
+        System.out.println("1. Get all news");
+        System.out.println("2. Get news by id");
+        System.out.println("3. Create news");
+        System.out.println("4. Update news by id");
+        System.out.println("5. Delete news by id");
+        System.out.println("0. Exit program");
+    }
+
+    public void getAllNews() {
+        newsController.getAll().forEach(System.out::println);
+    }
+
+    public void getNewsById(Scanner input) {
+        System.out.println("Enter news id:");
+        System.out.println(newsController.getById(userNumberValidation(input)));
+    }
+
+    public void createNews(Scanner input) {
+        boolean isValid = false;
+        NewsDtoRequest request = null;
+
+        while (!isValid) {
+            try {
+                System.out.println("Enter news title:");
+                String title = input.nextLine();
+                System.out.println("Enter news content:");
+                String content = input.nextLine();
+                System.out.println("Enter author id:");
+                Long authorId = userNumberValidation(input);
+                request = new NewsDtoRequest(null, title, content, authorId);
+                isValid = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println(newsController.create(request));
+    }
+
+    public void updateNews(Scanner input) {
+        boolean isValid = false;
+        NewsDtoRequest request = null;
+
+        while (!isValid) {
+            try {
+                System.out.println("Enter news id:");
+                Long newsId = userNumberValidation(input);
+                System.out.println("Enter news title:");
+                String title = input.nextLine();
+                System.out.println("Enter news content:");
+                String content = input.nextLine();
+                System.out.println("Enter author id:");
+                Long authorId = userNumberValidation(input);
+                request = new NewsDtoRequest(newsId, title, content, authorId);
+                isValid = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println(newsController.update(request));
+    }
+
+    public void deleteNews(Scanner input) {
+        System.out.println("Enter news id:");
+        System.out.println(newsController.deleteById(userNumberValidation(input)));
+    }
+
+    private long userNumberValidation(Scanner input) {
+        try {
+            long userNumber = input.nextLong();
+            input.nextLine();
+            return userNumber;
+        } catch (Exception e) {
+            input.nextLine();
+            throw new ValidatorException(3000, "Input should be number");
+        }
+    }
+
+}
