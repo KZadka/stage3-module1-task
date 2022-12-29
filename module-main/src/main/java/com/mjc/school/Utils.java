@@ -1,14 +1,16 @@
 package com.mjc.school;
 
-import com.mjc.school.controller.NewsController;
+import com.mjc.school.controller.implementation.NewsController;
+import com.mjc.school.controller.interfaces.Controller;
 import com.mjc.school.service.dto.NewsDtoRequest;
+import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ValidatorException;
 
 import java.util.Scanner;
 
 public class Utils {
 
-    NewsController newsController = new NewsController();
+    private final Controller<NewsDtoRequest, NewsDtoResponse> newsController = new NewsController();
 
     public void menu() {
         System.out.println("Pick a number for operation: ");
@@ -21,12 +23,12 @@ public class Utils {
     }
 
     public void getAllNews() {
-        newsController.getAll().forEach(System.out::println);
+        newsController.readAll().forEach(System.out::println);
     }
 
     public void getNewsById(Scanner input) {
         System.out.println("Enter news id:");
-        System.out.println(newsController.getById(userNumberValidation(input)));
+        System.out.println(newsController.readById(userNumberValidation(input)));
     }
 
     public void createNews(Scanner input) {
