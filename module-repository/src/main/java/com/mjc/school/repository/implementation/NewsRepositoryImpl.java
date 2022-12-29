@@ -1,4 +1,8 @@
-package com.mjc.school.repository;
+package com.mjc.school.repository.implementation;
+
+import com.mjc.school.repository.data.DataSource;
+import com.mjc.school.repository.entity.News;
+import com.mjc.school.repository.NewsRepository;
 
 import java.util.ArrayList;
 import java.util.Comparator;

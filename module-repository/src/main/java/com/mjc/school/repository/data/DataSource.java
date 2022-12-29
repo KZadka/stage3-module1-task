@@ -1,4 +1,7 @@
-package com.mjc.school.repository;
+package com.mjc.school.repository.data;
+
+import com.mjc.school.repository.entity.Author;
+import com.mjc.school.repository.entity.News;
 
 import java.io.BufferedReader;
 import java.io.IOException;
