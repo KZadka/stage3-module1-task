@@ -13,19 +13,19 @@ public class NewsRepositoryImpl implements NewsRepository<News> {
     private final DataSource dataSource = new DataSource();
 
     @Override
-    public List<News> getAll() {
+    public List<News> readAll() {
         return dataSource.getNews();
     }
 
     @Override
-    public News getById(Long id) {
+    public News readById(Long id) {
         return dataSource.getNews().stream()
                 .filter(news -> id.equals(news.getId()))
                 .findFirst().get();
     }
 
     @Override
-    public News create(News newsToAdd) {
+    public News createNews(News newsToAdd) {
         List<News> news = dataSource.getNews();
         news.sort(Comparator.comparing(News::getId));
         if (!news.isEmpty()) {
@@ -38,8 +38,8 @@ public class NewsRepositoryImpl implements NewsRepository<News> {
     }
 
     @Override
-    public News update(News newsToUpdate) {
-        News news = this.getById(newsToUpdate.getId());
+    public News updateNews(News newsToUpdate) {
+        News news = this.readById(newsToUpdate.getId());
         news.setTitle(newsToUpdate.getTitle());
         news.setContent(newsToUpdate.getContent());
         news.setLastUpdateDate(newsToUpdate.getLastUpdateDate());
@@ -50,7 +50,7 @@ public class NewsRepositoryImpl implements NewsRepository<News> {
     @Override
     public Boolean deleteById(Long id) {
         List<News> newsToDelete = new ArrayList<>();
-        newsToDelete.add(getById(id));
+        newsToDelete.add(readById(id));
         return dataSource.getNews().removeAll(newsToDelete);
     }
 

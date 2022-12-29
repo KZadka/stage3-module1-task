@@ -56,7 +56,7 @@ public class Utils {
 
         while (!isValid) {
             try {
-                System.out.println("Enter news id:");
+                System.out.println("Enter id of news to update:");
                 Long newsId = userNumberValidation(input);
                 System.out.println("Enter news title:");
                 String title = input.nextLine();
@@ -74,7 +74,7 @@ public class Utils {
     }
 
     public void deleteNews(Scanner input) {
-        System.out.println("Enter news id:");
+        System.out.println("Enter id of news to delete:");
         System.out.println(newsController.deleteById(userNumberValidation(input)));
     }
 

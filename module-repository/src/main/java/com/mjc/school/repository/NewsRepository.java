@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface NewsRepository <T> {
 
-    List<T> getAll();
+    List<T> readAll();
 
-    T getById(Long id);
+    T readById(Long id);
 
-    T create(T data);
+    T createNews(T data);
 
-    T update(T data);
+    T updateNews(T data);
 
     Boolean deleteById(Long id);
 

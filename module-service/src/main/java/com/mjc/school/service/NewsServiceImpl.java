@@ -19,7 +19,7 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
 
     @Override
     public List<NewsDtoResponse> getAll() {
-        return repository.getAll().stream()
+        return repository.readAll().stream()
                 .map(news -> modelMapper.map(news, NewsDtoResponse.class))
                 .collect(Collectors.toList());
     }
@@ -28,7 +28,7 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
     public NewsDtoResponse getById(Long id) {
         validator.validateId(id);
         if (repository.newsExistsById(id)) {
-            News news = repository.getById(id);
+            News news = repository.readById(id);
             return modelMapper.map(news, NewsDtoResponse.class);
         } else {
             throw new ResourceNotFoundException(2010, "News with that ID does not exist.");
@@ -42,7 +42,7 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
         LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         newsToCreate.setCreateDate(date);
         newsToCreate.setLastUpdateDate(date);
-        News newsToBeAdded = repository.create(newsToCreate);
+        News newsToBeAdded = repository.createNews(newsToCreate);
         return modelMapper.map(newsToBeAdded, NewsDtoResponse.class);
     }
 
@@ -53,7 +53,7 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
             News newsToCreate = modelMapper.map(request, News.class);
             LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
             newsToCreate.setLastUpdateDate(date);
-            News newsToBeAdded = repository.update(newsToCreate);
+            News newsToBeAdded = repository.updateNews(newsToCreate);
             return modelMapper.map(newsToBeAdded, NewsDtoResponse.class);
         } else {
             throw new ResourceNotFoundException(2010, "News with that ID does not exist.");
