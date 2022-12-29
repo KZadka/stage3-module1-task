@@ -1,33 +1,33 @@
 package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.data.DataSource;
-import com.mjc.school.repository.entity.News;
+import com.mjc.school.repository.entity.NewsModel;
 import com.mjc.school.repository.NewsRepository;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class NewsRepositoryImpl implements NewsRepository<News> {
+public class NewsRepositoryImpl implements NewsRepository<NewsModel> {
 
     private final DataSource dataSource = new DataSource();
 
     @Override
-    public List<News> readAll() {
+    public List<NewsModel> readAll() {
         return dataSource.getNews();
     }
 
     @Override
-    public News readById(Long id) {
+    public NewsModel readById(Long id) {
         return dataSource.getNews().stream()
                 .filter(news -> id.equals(news.getId()))
                 .findFirst().get();
     }
 
     @Override
-    public News createNews(News newsToAdd) {
-        List<News> news = dataSource.getNews();
-        news.sort(Comparator.comparing(News::getId));
+    public NewsModel createNews(NewsModel newsToAdd) {
+        List<NewsModel> news = dataSource.getNews();
+        news.sort(Comparator.comparing(NewsModel::getId));
         if (!news.isEmpty()) {
             newsToAdd.setId(news.get(news.size() - 1).getId() + 1L);
         } else {
@@ -38,8 +38,8 @@ public class NewsRepositoryImpl implements NewsRepository<News> {
     }
 
     @Override
-    public News updateNews(News newsToUpdate) {
-        News news = this.readById(newsToUpdate.getId());
+    public NewsModel updateNews(NewsModel newsToUpdate) {
+        NewsModel news = this.readById(newsToUpdate.getId());
         news.setTitle(newsToUpdate.getTitle());
         news.setContent(newsToUpdate.getContent());
         news.setLastUpdateDate(newsToUpdate.getLastUpdateDate());
@@ -49,7 +49,7 @@ public class NewsRepositoryImpl implements NewsRepository<News> {
 
     @Override
     public Boolean deleteById(Long id) {
-        List<News> newsToDelete = new ArrayList<>();
+        List<NewsModel> newsToDelete = new ArrayList<>();
         newsToDelete.add(readById(id));
         return dataSource.getNews().removeAll(newsToDelete);
     }

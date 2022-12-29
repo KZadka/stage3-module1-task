@@ -1,7 +1,7 @@
 package com.mjc.school.repository.data;
 
-import com.mjc.school.repository.entity.Author;
-import com.mjc.school.repository.entity.News;
+import com.mjc.school.repository.entity.AuthorModel;
+import com.mjc.school.repository.entity.NewsModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,8 +19,8 @@ public class DataSource {
     private static final int LINES_IN_FILE = 30;
     private static final int NUMBER_OF_NEWS_AND_AUTHORS = 20;
 
-    private List<Author> authors;
-    private List<News> news;
+    private List<AuthorModel> authors;
+    private List<NewsModel> news;
 
     Random random = new Random();
 
@@ -29,28 +29,28 @@ public class DataSource {
         this.news = getNewsInternally();
     }
 
-    public List<Author> getAuthors() {
+    public List<AuthorModel> getAuthors() {
         return this.authors;
     }
-    private List<Author> getAuthorsInternally() {
+    private List<AuthorModel> getAuthorsInternally() {
         authors = new ArrayList<>();
 
         for (int i = 1; i <= NUMBER_OF_NEWS_AND_AUTHORS; ++i) {
-            authors.add(new Author((long) i, readFile("author.txt")));
+            authors.add(new AuthorModel((long) i, readFile("author.txt")));
         }
         return authors;
     }
 
-    public List<News> getNews() {
+    public List<NewsModel> getNews() {
         return this.news;
     }
 
-    private List<News> getNewsInternally() {
+    private List<NewsModel> getNewsInternally() {
         news = new ArrayList<>();
         LocalDateTime date = dateCreator();
 
         for (int i = 1; i <= NUMBER_OF_NEWS_AND_AUTHORS; ++i) {
-            news.add(new News((long) i, readFile("news.txt"), readFile("content.txt"), date, date, authors.get(random.nextInt(authors.size())).getId()));
+            news.add(new NewsModel((long) i, readFile("news.txt"), readFile("content.txt"), date, date, authors.get(random.nextInt(authors.size())).getId()));
         }
         return news;
     }
