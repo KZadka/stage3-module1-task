@@ -57,7 +57,6 @@ public class DataSource {
 
     private String readFile(String fileName) {
 
-        Random random = new Random();
         int lineToGet = random.nextInt(LINES_IN_FILE);
         String contents = "";
         try{
@@ -85,7 +84,6 @@ public class DataSource {
     }
 
     public LocalDateTime dateCreator() {
-        Random random = new Random();
         int minutesToSubtract = random.nextInt(555_000);
         LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         return now.minusMinutes(minutesToSubtract);
