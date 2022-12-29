@@ -6,7 +6,7 @@ import com.mjc.school.repository.implementation.NewsRepositoryImpl;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.interfaces.NewsService;
-import com.mjc.school.service.validator.NewsValidator;
+import com.mjc.school.service.validator.Validator;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 
@@ -17,21 +17,21 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoResponse> {
 
     private final ModelMapper modelMapper = new ModelMapper();
-    private final Repository<NewsModel> repository = new NewsRepositoryImpl();
-    private final NewsValidator validator = new NewsValidator();
+    private final Repository<NewsModel> newsRepository = new NewsRepositoryImpl();
+    private final Validator newsValidator = new Validator();
 
     @Override
     public List<NewsDtoResponse> readAll() {
-        return repository.readAll().stream()
+        return newsRepository.readAll().stream()
                 .map(news -> modelMapper.map(news, NewsDtoResponse.class))
                 .toList();
     }
 
     @Override
     public NewsDtoResponse readById(Long id) {
-        validator.validateId(id);
-        if (repository.newsExistsById(id)) {
-            NewsModel news = repository.readById(id);
+        newsValidator.validateId(id);
+        if (newsRepository.newsExistsById(id)) {
+            NewsModel news = newsRepository.readById(id);
             return modelMapper.map(news, NewsDtoResponse.class);
         } else {
             throw new ResourceNotFoundException(2010, "News with that ID does not exist.");
@@ -40,23 +40,23 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
 
     @Override
     public NewsDtoResponse create(NewsDtoRequest request) {
-        validator.validateDto(request);
+        newsValidator.validateDto(request);
         NewsModel newsToCreate = modelMapper.map(request, NewsModel.class);
         LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         newsToCreate.setCreateDate(date);
         newsToCreate.setLastUpdateDate(date);
-        NewsModel newsToBeAdded = repository.createNews(newsToCreate);
+        NewsModel newsToBeAdded = newsRepository.createNews(newsToCreate);
         return modelMapper.map(newsToBeAdded, NewsDtoResponse.class);
     }
 
     @Override
     public NewsDtoResponse update(NewsDtoRequest request) {
-        validator.validateDto(request);
-        if (repository.newsExistsById(request.getId())) {
+        newsValidator.validateDto(request);
+        if (newsRepository.newsExistsById(request.getId())) {
             NewsModel newsToCreate = modelMapper.map(request, NewsModel.class);
             LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
             newsToCreate.setLastUpdateDate(date);
-            NewsModel newsToBeAdded = repository.updateNews(newsToCreate);
+            NewsModel newsToBeAdded = newsRepository.updateNews(newsToCreate);
             return modelMapper.map(newsToBeAdded, NewsDtoResponse.class);
         } else {
             throw new ResourceNotFoundException(2010, "News with that ID does not exist.");
@@ -65,9 +65,9 @@ public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoRespo
 
     @Override
     public Boolean deleteById(Long id) {
-        validator.validateId(id);
-        if (repository.newsExistsById(id)) {
-            return repository.deleteById(id);
+        newsValidator.validateId(id);
+        if (newsRepository.newsExistsById(id)) {
+            return newsRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException(2010, "News with that ID does not exist.");
         }

@@ -4,7 +4,7 @@ import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import com.mjc.school.service.exceptions.ValidatorException;
 
-public class NewsValidator {
+public class Validator {
 
     private static final Integer TITLE_MIN_LENGTH = 5;
     private static final Integer TITLE_MAX_LENGTH = 30;
