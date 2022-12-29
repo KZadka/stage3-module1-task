@@ -1,9 +1,9 @@
 package com.mjc.school.controller;
 
-import com.mjc.school.service.NewsDtoRequest;
-import com.mjc.school.service.NewsDtoResponse;
-import com.mjc.school.service.NewsService;
-import com.mjc.school.service.NewsServiceImpl;
+import com.mjc.school.service.dto.NewsDtoRequest;
+import com.mjc.school.service.dto.NewsDtoResponse;
+import com.mjc.school.service.interfaces.NewsService;
+import com.mjc.school.service.implementation.NewsServiceImpl;
 
 import java.util.List;
 

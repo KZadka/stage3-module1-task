@@ -2,7 +2,7 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.data.DataSource;
 import com.mjc.school.repository.entity.NewsModel;
-import com.mjc.school.repository.NewsRepository;
+import com.mjc.school.repository.interfaces.NewsRepository;
 
 import java.util.ArrayList;
 import java.util.Comparator;

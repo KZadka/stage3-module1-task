@@ -1,8 +1,12 @@
-package com.mjc.school.service;
+package com.mjc.school.service.implementation;
 
-import com.mjc.school.repository.NewsRepository;
+import com.mjc.school.repository.interfaces.NewsRepository;
 import com.mjc.school.repository.entity.NewsModel;
 import com.mjc.school.repository.implementation.NewsRepositoryImpl;
+import com.mjc.school.service.dto.NewsDtoRequest;
+import com.mjc.school.service.dto.NewsDtoResponse;
+import com.mjc.school.service.interfaces.NewsService;
+import com.mjc.school.service.validator.Validator;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 

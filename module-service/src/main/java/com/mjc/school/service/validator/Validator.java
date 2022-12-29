@@ -1,5 +1,6 @@
-package com.mjc.school.service;
+package com.mjc.school.service.validator;
 
+import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
 import com.mjc.school.service.exceptions.ValidatorException;
 

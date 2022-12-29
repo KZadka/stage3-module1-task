@@ -1,6 +1,10 @@
 package com.mjc.school.service;
 
+import com.mjc.school.service.dto.NewsDtoRequest;
+import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ResourceNotFoundException;
+import com.mjc.school.service.implementation.NewsServiceImpl;
+import com.mjc.school.service.interfaces.NewsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NewsServiceImplTest {
 
-    private NewsService< NewsDtoRequest, NewsDtoResponse> service;
+    private NewsService<NewsDtoRequest, NewsDtoResponse> service;
 
     @BeforeEach
     void setUp() {

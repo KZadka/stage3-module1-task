@@ -1,7 +1,7 @@
 package com.mjc.school;
 
 import com.mjc.school.controller.NewsController;
-import com.mjc.school.service.NewsDtoRequest;
+import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.exceptions.ValidatorException;
 
 import java.util.Scanner;
