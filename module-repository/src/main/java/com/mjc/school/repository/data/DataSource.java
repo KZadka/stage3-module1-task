@@ -22,6 +22,8 @@ public class DataSource {
     private List<Author> authors;
     private List<News> news;
 
+    Random random = new Random();
+
     public DataSource() {
         this.authors = getAuthorsInternally();
         this.news = getNewsInternally();
@@ -45,7 +47,6 @@ public class DataSource {
 
     private List<News> getNewsInternally() {
         news = new ArrayList<>();
-        Random random = new Random();
         LocalDateTime date = dateCreator();
 
         for (int i = 1; i <= NUMBER_OF_NEWS_AND_AUTHORS; ++i) {
