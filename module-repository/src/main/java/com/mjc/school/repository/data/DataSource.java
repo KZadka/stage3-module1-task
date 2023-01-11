@@ -32,6 +32,7 @@ public class DataSource {
     public List<AuthorModel> getAuthors() {
         return this.authors;
     }
+
     private List<AuthorModel> getAuthorsInternally() {
         authors = new ArrayList<>();
 
@@ -59,7 +60,7 @@ public class DataSource {
 
         int lineToGet = random.nextInt(LINES_IN_FILE);
         String contents = "";
-        try{
+        try {
             InputStream inputStream = this.getClass()
                     .getClassLoader()
                     .getResourceAsStream(fileName);

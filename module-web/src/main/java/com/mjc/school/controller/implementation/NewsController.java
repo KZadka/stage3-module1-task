@@ -10,7 +10,7 @@ import java.util.List;
 
 public class NewsController implements Controller<NewsDtoRequest, NewsDtoResponse> {
 
-    private final NewsService<NewsDtoRequest, NewsDtoResponse> newsService = new NewsServiceImpl();
+    private final NewsService<NewsDtoRequest, NewsDtoResponse> newsService = NewsServiceImpl.getNewsService();
 
     @Override
     public List<NewsDtoResponse> readAll() {

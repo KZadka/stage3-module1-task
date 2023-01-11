@@ -16,9 +16,23 @@ import java.util.List;
 
 public class NewsServiceImpl implements NewsService<NewsDtoRequest, NewsDtoResponse> {
 
-    private final ModelMapper modelMapper = new ModelMapper();
-    private final Repository<NewsModel> newsRepository = new NewsRepositoryImpl();
-    private final Validator newsValidator = new Validator();
+    private static NewsServiceImpl newsService;
+    private final ModelMapper modelMapper;
+    private final Repository<NewsModel> newsRepository;
+    private final Validator newsValidator;
+
+    public static NewsServiceImpl getNewsService() {
+        if (newsService == null) {
+            newsService = new NewsServiceImpl();
+        }
+        return newsService;
+    }
+
+    public NewsServiceImpl() {
+        modelMapper = new ModelMapper();
+        newsRepository = new NewsRepositoryImpl();
+        newsValidator = new Validator();
+    }
 
     @Override
     public List<NewsDtoResponse> readAll() {

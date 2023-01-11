@@ -20,7 +20,7 @@ class NewsServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        service = new NewsServiceImpl();
+        service = new  NewsServiceImpl();
     }
 
     @Test
@@ -29,6 +29,7 @@ class NewsServiceImplTest {
 
         List<NewsDtoResponse> newsList = service.readAll();
 
+        newsList.forEach(System.out::println);
         assertEquals(expectedSize, newsList.size());
     }
 
